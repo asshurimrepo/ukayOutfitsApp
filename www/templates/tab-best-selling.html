@@ -1,0 +1,20 @@
+<ion-view view-title="<i class='ion-android-star'></i> Best Selling">
+  <ion-content>
+
+      <div class="preloader text-center padding" ng-hide="lists.length > 0">
+          <ion-spinner icon="crescent"></ion-spinner> <br>
+          Loading Data...
+      </div>
+
+      <div class="list">
+
+          <a class="item item-thumbnail-left" href="#/tab/products/{{ item.id }}" ng-repeat="item in lists">
+              <img ng-src="{{ item.imageThumb }}">
+              <h2>{{ item.title }}</h2>
+              <p>PHP {{ (item.price * 42).toFixed(2) }}</p>
+          </a>
+
+
+      </div>
+  </ion-content>
+</ion-view>

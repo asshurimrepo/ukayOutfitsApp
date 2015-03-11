@@ -1,0 +1,17 @@
+/* Empty. Add your own CSS if you like */
+.full-image{
+    border: 1px solid #E5E5E5;
+    padding: 15px;
+}
+
+h2 small{
+    display: inline-block !important;
+}
+
+.card small{
+    font-size: 95%;
+}
+
+.card h2{
+    font-weight: bold;
+}

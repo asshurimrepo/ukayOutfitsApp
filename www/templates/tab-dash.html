@@ -1,0 +1,29 @@
+<ion-view view-title="<i class='ion-ios-home'></i> Ukay Outfits">
+  <ion-content class="padding">
+      <ion-refresher
+              pulling-text="Release to refresh..."
+              on-refresh="getNewList()">
+      </ion-refresher>
+
+
+      <div class="list card" ng-repeat="item in lists">
+
+          <div class="item item-avatar">
+              <img src="img/logo.png">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.category }} - <small class="assertive">Php {{ (item.price * 42).toFixed(2) }}</small></p>
+          </div>
+
+          <div class="item item-image">
+              <img ng-src="{{ item.imageThumb }}">
+          </div>
+
+          <a class="item item-icon-left assertive" href="#/tab/dash-product/{{ item.id }}">
+              <i class="icon ion-chevron-right"></i>
+              Open
+          </a>
+
+      </div>
+
+  </ion-content>
+</ion-view>
