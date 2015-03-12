@@ -1,0 +1,17 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-assertive">
+        <h1 class="title">Login</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeResult()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="padding">
+
+        <h2 class="text-center" ng-show="status.loading"><i class="fa fa-circle-o-notch fa-spin"></i></h2>
+
+        <button ng-click="reload()" ng-show="status.tapToRefresh" class="button button-clear button-block button-positive">
+            <i class="icon ion-ios-refresh-outline"></i> Tap to reload
+        </button>
+
+    </ion-content>
+</ion-modal-view>

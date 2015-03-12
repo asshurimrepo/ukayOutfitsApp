@@ -8,7 +8,7 @@
 
       <div class="list">
 
-          <a class="item item-thumbnail-left" href="#/tab/products/{{ item.id }}" ng-repeat="item in lists">
+          <a class="item item-thumbnail-left" on-hold="showOpts()" href="#/tab/products/{{ item.id }}" ng-repeat="item in lists">
               <img ng-src="{{ item.imageThumb }}">
               <h2>{{ item.title }}</h2>
               <p>PHP {{ (item.price * 42).toFixed(2) }}</p>

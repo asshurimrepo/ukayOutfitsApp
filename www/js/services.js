@@ -1,11 +1,11 @@
 angular.module('starter.services', [])
-
+    //BestSelling
     .factory('BestSelling', function ($http) {
         var items = [];
 
         this.get = function ($scope) {
-            var api = 'http://preview.iboostme.com/miruhssa/ukay/public/api/product/best-selling';
-            $http.get(api)
+            var api = 'http://preview.iboostme.com/miruhssa/ukay/public/api/product/product-status';
+            $http.get(api, {status: 'feature'})
                 .success(function (result) {
                     $scope.lists = result.products;
                     items = result.products;
@@ -15,8 +15,8 @@ angular.module('starter.services', [])
         };
 
         this.getItem = function (id) {
-            for(var i = 0; i<items.length; i++){
-                if(id == items[i].id){
+            for (var i = 0; i < items.length; i++) {
+                if (id == items[i].id) {
                     return items[i];
                 }
             }
@@ -27,6 +27,8 @@ angular.module('starter.services', [])
         return this;
     })
 
+
+    //UpdatedLists
     .factory('UpdatedList', function ($http, $ionicLoading) {
         var items = [];
 
@@ -44,9 +46,9 @@ angular.module('starter.services', [])
                 });
         };
 
-        this.getItem = function(id){
-            for(var i = 0; i<items.length; i++){
-                if(id == items[i].id){
+        this.getItem = function (id) {
+            for (var i = 0; i < items.length; i++) {
+                if (id == items[i].id) {
                     return items[i];
                 }
             }
@@ -54,6 +56,25 @@ angular.module('starter.services', [])
             return null;
         };
 
+
+        return this;
+    })
+
+    /*Search*/
+    .factory('Search', function ($http) {
+        var api = "http://preview.iboostme.com/miruhssa/ukay/public/api/product/search/search";
+
+        this.get = function($scope){
+            console.log($scope.items);
+            $http.get(api, $scope.items)
+                .success(function(){
+                    $scope.status.loading = false;
+                    $scope.status.tapToRefresh = false;
+                }).error(function(){
+                    $scope.tapToRefresh = true;
+                });
+
+        };
 
         return this;
     })

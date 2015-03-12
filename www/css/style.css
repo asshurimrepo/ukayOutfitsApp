@@ -15,3 +15,7 @@ h2 small{
 .card h2{
     font-weight: bold;
 }
+
+.item-input input{
+    font-size: 20px;
+}

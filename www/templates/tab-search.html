@@ -4,8 +4,39 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Search Ukay Outfits">
-  <ion-content class="padding">
 
+<ion-view view-title="<i class='ion-ios-search-strong'></i> Search">
+  <ion-content>
+
+      <div class="list">
+          <label class="item item-input item-floating-label">
+              <span class="input-label">Keywords</span>
+              <input data-ng-model="items.keywords" type="text" placeholder="Keywords">
+          </label>
+
+          <label class="item item-input item-floating-label">
+              <span class="input-label">Shoulder</span>
+              <input ng-model="items.shoulder" type="number" maxlength="2" placeholder="Shoulder">
+          </label>
+
+          <label class="item item-input item-floating-label">
+              <span class="input-label">Breast</span>
+              <input ng-model="items.breast" type="number" maxlength="2" placeholder="Breast">
+          </label>
+
+          <label class="item item-input item-floating-label">
+              <span class="input-label">Waist</span>
+              <input ng-model="items.waist" type="number" maxlength="2" placeholder="Waist">
+          </label>
+
+          <label class="item item-input item-floating-label">
+              <span class="input-label">Hips</span>
+              <input ng-model="items.hips" type="number" maxlength="2" placeholder="Hips">
+          </label>
+      </div>
+
+      <div class="padding">
+          <button class="button button-block button-positive" ng-click="beginSearch()">Begin Search</button>
+      </div>
   </ion-content>
 </ion-view>
