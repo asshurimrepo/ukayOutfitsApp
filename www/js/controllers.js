@@ -35,29 +35,12 @@ angular.module('starter.controllers', [])
         });
     })
 
-    .controller('BestSellingCtrl', function ($scope, BestSelling, $ionicActionSheet, $timeout) {
+    .controller('BestSellingCtrl', function ($scope, BestSelling, ActionSheet) {
         $scope.lists = [];
         BestSelling.get($scope);
 
         $scope.showOpts = function() {
-            // Show the action sheet
-            var hideSheet = $ionicActionSheet.show({
-                buttons: [
-                    { text: '<i class="icon ion-bag"></i> Add to bag' },
-                    { text: '<i class="icon ion-heart"></i> Add to wishlist' }
-                ],
-
-                titleText: 'What should you do?',
-                cancelText: 'Cancel',
-
-                buttonClicked: function(index) {
-                    return true;
-                }
-            });
-
-            $timeout(function() {
-                hideSheet();
-            }, 5000);
+            ActionSheet.show($scope);
         };
 
     })
@@ -81,7 +64,7 @@ angular.module('starter.controllers', [])
         });
     })
 
-    .controller('SearchCtrl', function ($scope, $ionicModal, Search) {
+    .controller('SearchCtrl', function ($scope, $ionicModal, Search, ActionSheet, $timeout) {
 
         $scope.items = {};
         $scope.lists = {};
@@ -89,6 +72,10 @@ angular.module('starter.controllers', [])
         $scope.status = {
             tapToRefresh:false,
             loading: true
+        };
+
+        $scope.showOpts = function() {
+            ActionSheet.show($scope);
         };
 
         $ionicModal.fromTemplateUrl('templates/modal-search-result.html', {
@@ -100,15 +87,34 @@ angular.module('starter.controllers', [])
 
         $scope.beginSearch = function(){
             Search.get($scope);
+            $scope.lists = [];
+            $scope.status.loading = true;
             $scope.modal.show();
         };
 
         $scope.reload = function(){
-
+            $scope.status.loading = true;
+            $scope.status.tapToRefresh = false;
         };
 
         $scope.closeResult = function(){
-            $scope.modal.hide();
+            $timeout(function(){
+                $scope.modal.hide();
+            }, 400);
         };
-    });
+    })
+    .controller('SearchProductCtrl', function ($scope, $stateParams, Search, $timeout) {
+        $scope.item = Search.getItem($stateParams.productId);
+
+        $timeout(function () {
+            $("#image" + $scope.item.id).reel({
+                images: $scope.item.imgSequence,
+                opening: 1,
+                delay: 5,
+                speed: .2
+            });
+        });
+    })
+
+;
 

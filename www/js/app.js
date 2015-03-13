@@ -99,6 +99,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     }
                 }
             })
+            .state('tab.search-product', {
+                url: '/search-product/:productId',
+                views: {
+                    'tab-search': {
+                        templateUrl: 'templates/tab-product.html',
+                        controller: 'SearchProductCtrl'
+                    }
+                }
+            })
 
             .state('tab.account', {
                 url: '/account',

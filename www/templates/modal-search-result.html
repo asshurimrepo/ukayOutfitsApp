@@ -1,17 +1,32 @@
 <ion-modal-view>
     <ion-header-bar class="bar-assertive">
-        <h1 class="title">Login</h1>
+        <h1 class="title">Search</h1>
         <div class="buttons">
             <button class="button button-clear" ng-click="closeResult()">Close</button>
         </div>
     </ion-header-bar>
-    <ion-content class="padding">
+    <ion-content>
 
-        <h2 class="text-center" ng-show="status.loading"><i class="fa fa-circle-o-notch fa-spin"></i></h2>
+        <div class="padding">
+            <h2 class="text-center" ng-show="status.loading"><i class="fa fa-circle-o-notch fa-spin"></i></h2>
 
-        <button ng-click="reload()" ng-show="status.tapToRefresh" class="button button-clear button-block button-positive">
-            <i class="icon ion-ios-refresh-outline"></i> Tap to reload
-        </button>
+            <button ng-click="reload()" ng-show="status.tapToRefresh" class="button button-clear button-block button-positive">
+                <i class="icon ion-ios-refresh-outline"></i> Tap to reload
+            </button>
+        </div>
+
+        <div class="text-center dark padding" ng-show="lists.length == 0 && ! status.loading">No results found..</div>
+
+        <div class="list" ng-show="lists.length > 0 ">
+
+            <a class="item item-thumbnail-left" on-hold="showOpts()" ng-click="closeResult()" href="#/tab/search-product/{{ item.id }}" ng-repeat="item in lists">
+                <img ng-src="{{ item.imageThumb }}">
+                <h2>{{ item.title }}</h2>
+                <p>PHP {{ (item.price * 42).toFixed(2) }}</p>
+            </a>
+
+
+        </div>
 
     </ion-content>
 </ion-modal-view>

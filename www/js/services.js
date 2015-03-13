@@ -1,4 +1,32 @@
 angular.module('starter.services', [])
+
+    //ActionSheet
+    .factory('ActionSheet', function($ionicActionSheet, $timeout){
+
+        this.show = function($scope){
+
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    { text: '<i class="icon ion-bag"></i> Add to bag' },
+                    { text: '<i class="icon ion-heart"></i> Add to wishlist' }
+                ],
+
+                titleText: 'What should you do?',
+                cancelText: 'Cancel',
+
+                buttonClicked: function(index) {
+                    return true;
+                }
+            });
+
+            $timeout(function() {
+                hideSheet();
+            }, 5000);
+        };
+
+        return this;
+    })
+
     //BestSelling
     .factory('BestSelling', function ($http) {
         var items = [];
@@ -63,17 +91,33 @@ angular.module('starter.services', [])
     /*Search*/
     .factory('Search', function ($http) {
         var api = "http://preview.iboostme.com/miruhssa/ukay/public/api/product/search/search";
+        var items = [];
 
-        this.get = function($scope){
-            console.log($scope.items);
-            $http.get(api, $scope.items)
-                .success(function(){
-                    $scope.status.loading = false;
-                    $scope.status.tapToRefresh = false;
-                }).error(function(){
-                    $scope.tapToRefresh = true;
-                });
+        this.get = function ($scope) {
 
+            $http({
+                url: api,
+                method: "GET",
+                params: $scope.items
+            }).success(function (data) {
+                $scope.lists = data;
+                items = data;
+                $scope.status.loading = false;
+                $scope.status.tapToRefresh = false;
+            }).error(function () {
+                $scope.tapToRefresh = true;
+            });
+
+        };
+
+        this.getItem = function (id) {
+            for (var i = 0; i < items.length; i++) {
+                if (id == items[i].id) {
+                    return items[i];
+                }
+            }
+
+            return null;
         };
 
         return this;
